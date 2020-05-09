@@ -1,0 +1,51 @@
+---
+title: "R-Markdown and Leaflet Assignment"
+author: "Ritesh Kumar Maurya"
+date: "08/05/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+#### This data has been pulled from 2011 Census of INDIA
+Link to Data Source: https://censusindia.gov.in/DigitalLibrary/MFTableSeries.aspxhttps://censusindia.gov.in/DigitalLibrary/MFTableSeries.aspx
+
+The map shows the condition of house owned or inhabited by SC community people in various states of India.
+
+Types of House:
+
+- Good <br>
+- Livable <br>
+- Dilapidated <br>
+```{r cars}
+
+```
+
+#### Map Representing Type of House and Number Information
+
+```{r pressure, echo= FALSE, include=FALSE}
+library(leaflet)
+library(leaflet.minicharts)
+df <- read.csv("E:/Online Course/Developing Data Products/Submission Week-2/Census_HOUSE_STATUS_SC.csv")
+map <- leaflet(df)
+map <- addTiles(map)
+
+map <- addMinicharts(map,
+                     df$Longitude,
+                     df$Latitude,
+                     type ="pie",
+                     chartdata = df[,c(2:4)],
+                     colorPalette = c("green","yellow","red"),
+                     popup = popupArgs(supValues = df[,c(1:4)], showValues = FALSE))
+
+
+```
+
+```{r}
+map
+
+```
+
+
